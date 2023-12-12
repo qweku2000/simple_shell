@@ -65,7 +65,7 @@ void prompt_line()
     hashes(buffer_copy);
 
     /* Tokenize string */
-    string = strtok(buffer_original, " \n");
+    string = strtok(buffer_original, " ;\n");
 
     if (string)
     {
