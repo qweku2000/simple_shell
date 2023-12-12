@@ -51,7 +51,14 @@ void execute(char *argv[])
 	  }
 	else if ( strcmp(cmd,"$?") == 0)
 	  {
-	    
+	    if (argv[1]!=NULL)
+	      {
+		perror("Error:Too many arguments");
+	      }
+	    else
+	      {
+		
+	      }
 	  }
         else
 	  {

@@ -18,23 +18,23 @@ int main()
 
 
 /**
- * printprompt_readline - Function to print prompt and read input from user
+ * prompt_line - Function to print prompt and read input from user
  */
 void prompt_line()
 {
     /* Initialization */
-    char *buffer = NULL;
-    char *sstring;
+    char *buffer_original = NULL;
+    char *string;
     char *buffer_copy;
     ssize_t getline_bytes;
     size_t n = 0;
-    int ntokens = 0, i;
+    int no_tokens = 0, i;
     char **string_arr;
     char *token;
     char buf[1064];
-    int is_interactive = isatty(fileno(stdin));
+    int interactive = isatty(fileno(stdin));
 
-    if (is_interactive)
+    if (interactive)
     {
         if (getcwd(buf, sizeof(buf)) != NULL)
         {
@@ -48,34 +48,34 @@ void prompt_line()
     }
 
     /* Function for reading input from user */
-    getline_bytes = getline(&buffer, &n, stdin);
+    getline_bytes = getline(&buffer_original, &n, stdin);
     if (getline_bytes == -1)
       {
-	free(buffer); /*Free dynamically allocated buffer*/
+	free(buffer_original); /*Free dynamically allocated buffer*/
 	exit(0);
       }
-    if (getline_bytes == 1 && buffer[0] == '\n')
+    if (getline_bytes == 1 && buffer_original[0] == '\n')
       {
-	free(buffer); /*Free dynamically allocated buffer*/
+	free(buffer_original); /*Free dynamically allocated buffer*/
 	return;
       }
 
-    buffer_copy = strdup(buffer);
+    buffer_copy = strdup(buffer_original);
    
     hashes(buffer_copy);
 
     /* Tokenize string */
-    sstring = strtok(buffer, " \n");
+    string = strtok(buffer_original, " \n");
 
-    if (sstring)
+    if (string)
     {
         /* Keep adding up to keep track of the number of tokens needed */
-        ntokens++;
-        sstring = strtok(NULL, " \n");
+        no_tokens++;
+        string = strtok(NULL, " \n");
     }
-    ntokens++;
+    no_tokens++;
 
-    string_arr = malloc(sizeof(char *) * (ntokens + 1));
+    string_arr = malloc(sizeof(char *) * (no_tokens + 1));
 
     token = strtok(buffer_copy, " \n");
     for (i = 0; token != NULL; i++)
@@ -93,5 +93,5 @@ void prompt_line()
     }
     free(string_arr);
     free(buffer_copy);
-    free(buffer);
+    free(buffer_original);
 }

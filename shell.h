@@ -12,7 +12,7 @@
 #include <errno.h>
 
 #define BUFFER_SIZE 4096
-
+#define MAX_INPUT_SIZE 1024
 
 extern char **environ;
 

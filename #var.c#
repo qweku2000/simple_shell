@@ -1,0 +1,22 @@
+#include "shell.h"
+
+
+
+
+void handle_variables(char *input) {
+    char *pos;
+    char buffer[MAX_INPUT_SIZE];
+
+    /*Handle $?*/
+    while ((pos = strstr(input, "$?")) != NULL)
+      {
+        snprintf(buffer, sizeof(buffer), "%s%d%s", input, WEXITSTATUS(system(NULL)), pos + 2);
+        strcpy(input, buffer);
+      }
+
+    /*Handle $$*/
+    while ((pos = strstr(input, "$$")) != NULL) {
+        snprintf(buffer, sizeof(buffer), "%s%d%s", input, (int)getpid(), pos + 2);
+        strcpy(input, buffer);
+    }
+}
