@@ -1,5 +1,25 @@
 #include "shell.h"
 
+
+int last_command_exit_status = 0;
+
+int get_exit_status()
+{
+    return last_command_exit_status;
+}
+
+void set_last_command_exit_status(int exit_status)
+{
+    last_command_exit_status = exit_status;
+}
+
+pid_t get_pid(void)
+{
+    return getpid();
+}
+
+
+
 /**
  * exit_shell - Exits the shell program
  * @status: The exit status code

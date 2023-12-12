@@ -15,6 +15,7 @@
 #define MAX_INPUT_SIZE 1024
 
 extern char **environ;
+extern int last_command_exit_status;
 
 void hashes(char *input);
 void replace_hashtags(char *str);
@@ -28,6 +29,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 void _unsetenv(char *var);
 void _setenv(char *var,char* val);
 int _getchar();
-
-
+void set_last_command_exit_status(int exit_status);
+int get_exit_status();
+pid_t get_pid(void);
 #endif

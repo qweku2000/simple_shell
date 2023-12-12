@@ -57,7 +57,18 @@ void execute(char *argv[])
 	      }
 	    else
 	      {
-		
+		printf("%d\n", get_exit_status());
+	      }
+	  }
+	else if (strcmp(cmd,"$$") == 0)
+	  {
+	    if (argv[1]!=NULL)
+	      {
+		perror("Error:Too many arguments");
+	      }
+	    else
+	      {
+		printf("%d\n",get_pid());
 	      }
 	  }
         else
