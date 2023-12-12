@@ -49,6 +49,10 @@ void execute(char *argv[])
 	  {
             env_var();
 	  }
+	else if ( strcmp(cmd,"$?") == 0)
+	  {
+	    
+	  }
         else
 	  {
             /* Execute external command */
